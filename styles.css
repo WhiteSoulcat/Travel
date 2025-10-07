@@ -1,0 +1,152 @@
+body {
+    background: #181818;
+    color: #f8f8f8;
+    font-family: 'Sarabun', 'Tahoma', sans-serif;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #232323;
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 2px 18px #111;
+}
+
+h1, h2, h3 {
+    color: #ffd900;
+    margin-bottom: 12px;
+}
+
+.day-block {
+    background: #2b2b2b;
+    margin-bottom: 28px;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #111;
+}
+
+.day-block label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #ffd900;
+}
+
+.day-block input[type="time"],
+.day-block input[type="number"],
+.day-block select {
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1em;
+    background: #232323;
+    color: #ffd900;
+    box-shadow: 0 1px 4px #111;
+}
+
+.day-block .return-row {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.day-block .return-row label {
+    margin-bottom: 0;
+    min-width: 100px;
+}
+
+.day-block .return-row select,
+.day-block .return-row input[type="time"] {
+    margin-bottom: 0;
+}
+
+ul {
+    padding-left: 28px;
+}
+
+li {
+    margin-bottom: 16px;
+    line-height: 1.7;
+    background: rgba(40,40,40,0.8);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.place-time {
+    color: #4fc3f7;
+    font-weight: bold;
+}
+
+.place-name {
+    color: #ffe066;
+}
+
+.weather {
+    margin: 6px 0 4px 0;
+    color: #acd1ff;
+    font-size: 0.97em;
+}
+
+.day-map {
+    margin-top: 12px;
+}
+
+a {
+    color: #4fc3f7;
+    text-decoration: underline;
+}
+
+.summary {
+    background: #232323;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 24px;
+    box-shadow: 0 2px 8px #111;
+    color: #ffd900;
+}
+
+.summary ul {
+    margin: 0;
+    padding-left: 24px;
+    color: #ffe066;
+}
+
+.lang-btn {
+    padding: 6px 18px;
+    border-radius: 8px;
+    margin-right: 10px;
+    background: #ffd900;
+    border: none;
+    color: #181818;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 2px 8px #111;
+    transition: background 0.2s;
+}
+.lang-btn.active {
+    background: #ffe066;
+}
+.lang-btn:hover {
+    background: #ffe066;
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 10px;
+        margin: 12px;
+    }
+    .day-block {
+        padding: 7px;
+        margin-bottom: 14px;
+    }
+    li {
+        padding: 6px 6px;
+    }
+}
