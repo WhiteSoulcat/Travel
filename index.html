@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Trip Now!</title>
+    <link href="https://fonts.googleapis.com/css?family=Prompt:400,700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0; padding: 0;
+            font-family: 'Prompt', sans-serif;
+            background: #f6f6f6;
+            min-height: 100vh; width: 100vw;
+            box-sizing: border-box;
+        }
+        .main-area {
+            width: 100vw;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .main-header {
+            width: 100%;
+            min-height: 640px;
+            position: relative;
+            background: #424464;
+            border-bottom: 20px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .header-bg-img {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 100vw;
+            height: 100%;
+            object-fit: cover;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        .main-title {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-size: 4.2rem;
+            font-weight: bold;
+            font-family: 'Prompt', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 32px #2a2a45cc, 0 0px 2px #fff;
+            margin-top: 46px;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 56px;
+            left: 56px;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .lang-flag {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            box-shadow: 0 8px 32px #ffd77c33;
+            border: 5px solid #fff;
+            background: #fff;
+            margin-bottom: 0px;
+            cursor: pointer;
+        }
+        .lang-bar {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+        .lang-label {
+            font-size: 2.74rem;
+            color: #fff6df;
+            font-family: 'Prompt', 'Kanit', sans-serif;
+            font-weight: bold;
+            text-shadow: 0 4px 32px #ffe7b899, 0 2px 0 #54300744;
+            letter-spacing: 1.5px;
+            margin: 0;
+            line-height: 1.01;
+            display: inline;
+        }
+        .lang-name {
+            font-size: 2.74rem;
+            color: #fff6df;
+            font-family: 'Prompt', 'Kanit', sans-serif;
+            font-weight: bold;
+            text-shadow: 0 4px 32px #ffe7b899, 0 2px 0 #54300744;
+            letter-spacing: 0px;
+            margin-left: 0;
+            display: inline;
+            vertical-align: middle;
+        }
+        .form-zone {
+            margin-top: -80px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            z-index: 10;
+            padding-bottom: 64px;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input-panel {
+            width: 1200px;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 40px;
+        }
+        .section-block, .plan-result-frame {
+            border-radius: 40px;
+            box-shadow: 0 8px 36px #ddb86922;
+            padding: 48px 54px 28px 54px;
+            margin-bottom: 0;
+            display: flex; flex-direction: column;
+            background: #fffbe6;
+            border: 4px solid #ffe6b0;
+            position: relative;
+            font-size: 1.12rem;
+        }
+        .plan-result-frame {
+            background: #fffef9;
+            margin: 0;
+            box-shadow: 0 4px 32px #ffcd6a33;
+            padding: 50px 60px 32px 60px;
+            border: 5px solid #ffe8b7;
+            font-size: 2.1rem;
+        }
+        .section-block.brown {background: #b99774; color: #fff;border-color: #b99774;}
+        .section-block.green {background: #b5d9b0; border-color: #b5d9b0;}
+        .section-block .section-title {
+            display: flex; align-items: center;
+            font-size: 2.4em; font-weight: bold;
+            color: #2d1818; margin-bottom: 22px;
+            letter-spacing: .8px;
+            text-shadow: 0 2px 18px #fff7da3d;
+        }
+        .section-block.brown .section-title {color: #fff;}
+        .section-block.green .section-title {color: #214e28;}
+        .section-block .section-title .icon {font-size: 3.2em; margin-right: 24px;}
+        .input-row {
+            display: flex; align-items: center; margin-bottom: 32px;
+            font-size: 1.2rem;
+        }
+        .traveler-block {background: transparent;
+            box-shadow: none; padding: 0; margin-bottom: 14px; font-size: 1.02rem;}
+        .traveler-block .input-label {
+            color: #856404;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 18px;
+            letter-spacing: 1.2px;
+            text-shadow: 0 2px 20px #fff6d8bb;
+        }
+        .traveler-block .sub-row {margin-bottom: 8px;}
+        .input-wrap {width: 100%; margin-bottom: 10px;}
+        .input-label {font-size: 1.07em; font-weight: 500; margin-bottom: 7px; color: #3b2805;}
+        .input-capsule, .select-capsule {
+            width: 100%; padding: 18px 26px;
+            font-size: 1.2em;
+            font-family: 'Prompt', sans-serif;
+            border-radius: 30px;
+            border: 3px solid #ffe6b0;
+            background: #fffbe6;
+            color: #3b2805;
+            outline: none;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            transition: border 0.14s, box-shadow 0.14s;
+            font-weight: bold; letter-spacing: 1.2px;
+        }
+        .input-capsule:focus, .select-capsule:focus {border-color: #c9a10c; box-shadow: 0 4px 24px #f7e07828;}
+        .input-capsule[type="date"] {
+            font-size: 3.8em !important;
+            height: 130px !important;
+            padding-top: 25px !important;
+            padding-bottom: 25px !important;
+            font-weight: bold;
+        }
+        .input-icon {display: none !important;}
+        .plan-result-frame .plan-title {
+            font-size: 2.1em;
+            color: #a48b54;
+            font-weight: bold;
+            margin-bottom: 26px;
+            letter-spacing: 2px;
+            text-align: center;
+            text-shadow: 0 4px 28px #e8d6bd;
+        }
+        .plan-result-frame .plan-section {
+            margin: 20px 0;
+            font-size: 1.38em;
+            font-weight: 500;
+            color: #30230b;
+        }
+        .plan-result-frame ul {
+            margin: 15px 0 22px 0;
+            padding-left: 0;
+            font-size: 1.18em;
+        }
+        .plan-result-frame li {
+            list-style: none;
+            padding: 12px 0 6px 0;
+            border-bottom: 1px dashed #eedbab;
+        }
+        .plan-result-frame .plan-summary {
+            background: #fffbe6;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px #dcbc7533;
+            padding: 46px 72px;
+            font-size: 2.1em;
+            color: #876824;
+            margin-top: 28px;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+        .plan-result-frame .emoji {
+            font-size: 1.3em;
+        }
+        .category-list-block {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 32px;
+        }
+        .category-label {
+            font-size: 2.3em;
+            font-weight: bold;
+            color: #856404;
+            margin-right: 12px;
+            cursor: pointer;
+        }
+        .category-label input[type="checkbox"] {
+            width: 48px;
+            height: 48px;
+            accent-color: #b99774;
+            margin-right: 14px;
+            vertical-align: middle;
+        }
+        .form-btn-zone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 32px;
+        }
+        .submit-btn {
+            font-size: 4em;
+            padding: 40px 80px;
+            border-radius: 60px;
+            background: rgba(255,255,255,0.7);
+            border: 5px solid #ffe6b0;
+            box-shadow: 0 8px 32px #ddb86944;
+            color: #856404;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-align: center;
+            transition: box-shadow 0.18s;
+        }
+        .submit-btn:hover {
+            background: rgba(255,255,245,0.93);
+            box-shadow: 0 12px 42px #ddb86988;
+            color: #a38a29;
+        }
+        @media (max-width: 900px) {
+            .input-panel { width: 99vw; padding: 22px;}
+            .main-title {font-size: 2.3rem;}
+            .main-header {min-height: 380px;}
+            .form-zone {margin-top: -40px;}
+            .header-bg-img { min-height: 240px; }
+            .section-block, .section-block.brown, .section-block.green, .plan-result-frame { font-size: 0.9rem; padding:18px;}
+            .submit-btn { font-size:4vw; padding:6vw 6vw;}
+            .category-label input[type="checkbox"]{width:36px;height:36px;}
+            .plan-result-frame .plan-summary { font-size: 1.15em; padding:18px;}
+        }
+        @media (max-width: 650px) {
+            .input-panel {padding: 12px 1vw 14px 1vw;}
+            .main-title {font-size: 1.35rem;}
+            .main-header {min-height: 100px;}
+            .form-zone {margin-top: -12px;}
+            .section-block, .section-block.brown, .section-block.green, .plan-result-frame { font-size: 0.6rem; padding:8px;}
+            .submit-btn { font-size:1.9rem; padding:14px 10vw;}
+            .category-label input[type="checkbox"]{width:28px;height:28px;}
+            .plan-result-frame .plan-summary { font-size: 1em; padding:10px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="main-bg-wrap">
+        <div class="main-area">
+            <div class="main-header">
+                <div class="lang-switcher">
+                    <img src="th-flag.jpg" alt="ภาษาไทย" class="lang-flag" id="langFlag" style="object-fit:cover;">
+                    <span class="lang-bar" id="langBar">
+                        <span class="lang-label" id="langLabel">ภาษา</span><span class="lang-name" id="langName">ไทย</span>
+                    </span>
+                </div>
+                <img src="8.png" alt="" class="header-bg-img" style="object-fit: cover; opacity:0.7;">
+                <div class="main-title" id="mainTitle">Plan Your Trip Now!</div>
+            </div>
+            <div class="form-zone">
+                <form class="input-panel" id="tripForm">
+                    <div class="section-block">
+                        <div class="section-title"><span class="icon">👥</span> <span id="labelNumTravelers">จำนวน นักท่องเที่ยว</span></div>
+                        <div class="input-row" style="margin-bottom:0;">
+                            <input type="number" id="numTravelers" name="numTravelers" min="1" value="1" required class="input-capsule">
+                        </div>
+                        <div id="travelersInput"></div>
+                    </div>
+                    <div class="section-block">
+                        <div class="section-title"><span class="icon">🛏️</span> <span id="labelHotel">โรงแรมที่พัก</span></div>
+                        <div class="input-row" style="margin-bottom:0;">
+                            <input type="text" id="hotel" name="hotel" placeholder="ชื่อโรงแรม" class="input-capsule" required>
+                        </div>
+                    </div>
+                    <div class="section-block brown">
+                        <div class="section-title">
+                            <span class="icon">📅</span>
+                            <span id="labelStartDate">วันที่เริ่มเที่ยว</span>
+                        </div>
+                        <div class="input-row" style="margin-bottom:0;">
+                            <label id="labelNumDays" style="font-size:1.2em;font-weight:bold;color:#5a4e3a;margin-right:28px;">จำนวนวันเที่ยว</label>
+                            <input type="number" id="numDays" name="numDays" min="1" value="1" class="input-capsule" style="max-width:220px;">
+                        </div>
+                        <div class="input-row" style="margin-bottom:0;position:relative;">
+                            <input type="date" id="startDate" name="startDate" class="input-capsule" required>
+                        </div>
+                        <div id="daysInput"></div>
+                    </div>
+                    <div class="section-block green">
+                        <div class="section-title"><span class="icon">💵</span> <span id="labelBudget">งบประมาณที่มี</span></div>
+                        <div class="input-row" style="margin-bottom:0;">
+                            <input type="number" id="budget" name="budget" min="1" class="input-capsule" required>
+                        </div>
+                    </div>
+                    <div class="section-block" style="margin-bottom:32px;">
+                        <div class="section-title"><span class="icon">🗺️</span> <span id="labelCategories">ประเภทสถานที่เที่ยว</span></div>
+                        <div class="category-list-block" id="categoriesGroup">
+                            <label class="category-label"><input type="checkbox" name="categories" value="ธรรมชาติ"><span id="catNature">ธรรมชาติ</span></label>
+                            <label class="category-label"><input type="checkbox" name="categories" value="วัฒนธรรม"><span id="catCulture">วัฒนธรรม</span></label>
+                            <label class="category-label"><input type="checkbox" name="categories" value="สร้างสรรค์"><span id="catCreative">สร้างสรรค์</span></label>
+                        </div>
+                    </div>
+                    <div class="form-btn-zone">
+                        <button type="submit" class="submit-btn" id="btnSubmit">Start Planning</button>
+                    </div>
+                </form>
+                <div id="result" style="margin-top:32px;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // ----------- TEXT CONFIG -----------
+    const LANG_TEXT = {
+        th: {
+            mainTitle: "วางแผนทริปของคุณ!",
+            numDays: "จำนวนวันเที่ยว",
+            numTravelers: "จำนวน นักท่องเที่ยว",
+            traveler: "ข้อมูลนักท่องเที่ยวคนที่",
+            travelerType: "คนไทย หรือ ต่างชาติ",
+            travelerSubtype: "เด็กไทย เด็กต่างชาติ ผู้ใหญ่ไทย ผู้ใหญ่ต่างชาติ",
+            thai:"คนไทย",
+            foreigner:"ต่างชาติ",
+            hotel: "โรงแรมที่พัก",
+            startDate: "วันที่เริ่มเที่ยว",
+            departHotel:"เวลาออกจากโรงแรม",
+            arriveHotel:"เวลาถึงโรงแรม",
+            budget: "งบประมาณที่มี",
+            categories: "ประเภทสถานที่เที่ยว",
+            catNature: "ธรรมชาติ",
+            catCulture: "วัฒนธรรม",
+            catCreative: "สร้างสรรค์",
+            day: "วันที่",
+            startTime: "เวลาที่อยากเริ่มเที่ยว",
+            maxPlaces: "จำนวนสถานที่ที่ต้องการเที่ยว",
+            returnTime: "เวลาที่ต้องการกลับโรงแรม",
+            btnSubmit: "วางแผนทริป!"
+        },
+        en: {
+            mainTitle: "Plan Your Trip Now!",
+            numDays: "Trip days",
+            numTravelers: "Number of travelers",
+            traveler: "Traveler Info #",
+            travelerType: "Thai or Foreigner",
+            travelerSubtype: "Thai Child, Foreign Child, Thai Adult, Foreign Adult",
+            thai:"Thai",
+            foreigner:"Foreigner",
+            hotel: "Hotel",
+            startDate: "Start date",
+            departHotel:"Departure time from hotel",
+            arriveHotel:"Arrival time at hotel",
+            budget: "Budget",
+            categories: "Place categories",
+            catNature: "Nature",
+            catCulture: "Culture",
+            catCreative: "Creative",
+            day: "Day",
+            startTime: "Start time",
+            maxPlaces: "Max places",
+            returnTime: "Return to hotel",
+            btnSubmit: "Start Planning"
+        }
+    };
+    let currentLang = 'th';
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        const t = LANG_TEXT[lang];
+        document.getElementById('mainTitle').textContent = t.mainTitle;
+        document.getElementById('labelNumDays').textContent = t.numDays;
+        document.getElementById('labelNumTravelers').textContent = t.numTravelers;
+        document.getElementById('labelHotel').textContent = t.hotel;
+        document.getElementById('labelStartDate').textContent = t.startDate;
+        document.getElementById('labelBudget').textContent = t.budget;
+        document.getElementById('labelCategories').textContent = t.categories;
+        document.getElementById('catNature').textContent = t.catNature;
+        document.getElementById('catCulture').textContent = t.catCulture;
+        document.getElementById('catCreative').textContent = t.catCreative;
+        document.getElementById('btnSubmit').textContent = t.btnSubmit;
+        document.getElementById('langFlag').src = lang === 'th' ? 'th-flag.jpg' : 'en-flag.jpg';
+        const bar = document.getElementById("langBar");
+        if (lang === "th") {
+            bar.innerHTML =
+                `<span class="lang-label" id="langLabel">ภาษา</span><span class="lang-name" id="langName">ไทย</span>`;
+        } else {
+            bar.innerHTML =
+                `<span class="lang-name" id="langName">English</span>`;
+        }
+        renderTravelersInput();
+        renderDaysInput();
+    }
+    document.getElementById('langFlag').addEventListener('click', function(){
+        const next = currentLang === 'th' ? 'en' : 'th';
+        setLanguage(next);
+    });
+
+    function renderTravelersInput() {
+        let n = parseInt(document.getElementById("numTravelers").value) || 1;
+        let t = LANG_TEXT[currentLang];
+        let html = '';
+        for(let i=1;i<=n;i++) {
+            html += `
+            <div class="traveler-block">
+                <div class="input-label">${t.traveler} ${i}</div>
+                <div class="sub-row">
+                    <select name="travelerType${i}" class="select-capsule traveler-type" required>
+                        <option value="" class="placeholder-selected" disabled selected>${t.travelerType}</option>
+                        <option value="${t.thai}" class="real-selected">${t.thai}</option>
+                        <option value="${t.foreigner}" class="real-selected">${t.foreigner}</option>
+                    </select>
+                </div>
+                <div class="sub-row">
+                    <select name="travelerSubtype${i}" class="select-capsule traveler-subtype" required>
+                        <option value="" class="placeholder-selected" disabled selected>${t.travelerSubtype}</option>
+                        <option value="เด็กไทย" class="real-selected">${currentLang === "th" ? "เด็กไทย" : "Thai Child"}</option>
+                        <option value="เด็กต่างชาติ" class="real-selected">${currentLang === "th" ? "เด็กต่างชาติ" : "Foreign Child"}</option>
+                        <option value="ผู้ใหญ่ไทย" class="real-selected">${currentLang === "th" ? "ผู้ใหญ่ไทย" : "Thai Adult"}</option>
+                        <option value="ผู้ใหญ่ต่างชาติ" class="real-selected">${currentLang === "th" ? "ผู้ใหญ่ต่างชาติ" : "Foreign Adult"}</option>
+                    </select>
+                </div>
+            </div>
+            `;
+        }
+        document.getElementById("travelersInput").innerHTML = html;
+
+        document.querySelectorAll('.traveler-type').forEach((sel, i) => {
+            function updateSubtype() {
+                const st = document.getElementsByName(`travelerSubtype${i+1}`)[0];
+                for (let op of st.options) op.disabled = false;
+                if(sel.value === t.thai){
+                    for (let op of st.options) {
+                        if (op.value === "เด็กต่างชาติ" || op.value === "ผู้ใหญ่ต่างชาติ") op.disabled = true;
+                    }
+                    if(st.value === "เด็กต่างชาติ" || st.value === "ผู้ใหญ่ต่างชาติ") st.value = "";
+                } else if(sel.value === t.foreigner){
+                    for (let op of st.options) {
+                        if (op.value === "เด็กไทย" || op.value === "ผู้ใหญ่ไทย") op.disabled = true;
+                    }
+                    if(st.value === "เด็กไทย" || st.value === "ผู้ใหญ่ไทย") st.value = "";
+                }
+            }
+            sel.addEventListener('change', updateSubtype);
+            updateSubtype();
+        });
+
+        document.querySelectorAll('.traveler-type').forEach(sel => {
+            function updateSelectStyle() {
+                if (sel.value === "") {
+                    sel.classList.remove('real-selected');
+                    sel.classList.add('placeholder-selected');
+                } else {
+                    sel.classList.remove('placeholder-selected');
+                    sel.classList.add('real-selected');
+                }
+            }
+            sel.addEventListener('change', updateSelectStyle);
+            updateSelectStyle();
+        });
+        document.querySelectorAll('.select-capsule').forEach(sel => {
+            sel.addEventListener('change', function() {
+                if (sel.value === "") {
+                    sel.classList.remove('real-selected');
+                    sel.classList.add('placeholder-selected');
+                } else {
+                    sel.classList.remove('placeholder-selected');
+                    sel.classList.add('real-selected');
+                }
+            });
+        });
+    }
+    document.getElementById("numTravelers").addEventListener("input", renderTravelersInput);
+
+    function renderDaysInput() {
+        let t = LANG_TEXT[currentLang];
+        let nDays = parseInt(document.getElementById("numDays")?.value || "1");
+        let startDate = document.getElementById("startDate")?.value;
+        let html = '';
+        let dateObj = startDate ? new Date(startDate) : new Date();
+
+        for(let d=1;d<=nDays;d++) {
+            let thisDate = "";
+            if(startDate) {
+                let dt = new Date(dateObj.getTime());
+                dt.setDate(dt.getDate() + (d-1));
+                thisDate = dt.toISOString().split('T')[0];
+            }
+            html += `<div class="info-block" style="margin-top:22px;background:#e9decf;border-radius:30px;padding:24px 18px;">
+                        <div style="font-size:1.14em;font-weight:bold;color:#3b2805;margin-bottom:18px;">
+                            ${t.day} ${d} ${thisDate ? `(${thisDate})` : ""}
+                        </div>
+                        <div class="input-wrap">
+                            <div class="input-label">${t.startTime}</div>
+                            <input type="time" name="startTime${d}" value="08:00" class="input-capsule" required>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="input-label">${t.maxPlaces}</div>
+                            <input type="number" name="maxPlaces${d}" min="1" max="12" value="3" class="input-capsule" required>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="input-label">${t.returnTime}</div>
+                            <input type="time" name="returnTime${d}" class="input-capsule" value="18:00">
+                        </div>
+                    </div>`;
+        }
+        document.getElementById("daysInput").innerHTML = html;
+    }
+    document.getElementById("startDate").addEventListener("input", renderDaysInput);
+    document.getElementById("numDays").addEventListener("input", renderDaysInput);
+    
+    function showRouteMap(map_points, places) {
+        const mapDiv = document.getElementById("mapZone");
+        mapDiv.innerHTML = "";
+        if (!map_points || map_points.length < 2) {
+            mapDiv.innerHTML = "<div style='text-align:center;color:#bfa758;font-size:1.3em;padding:40px;'>ไม่มีข้อมูลเส้นทางสำหรับแสดงแผนที่</div>";
+            return;
+        }
+        let center = map_points[0];
+        const map = L.map("mapZone").setView(center, 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        const polyline = L.polyline(map_points, {color: "#f39210", weight:6, opacity:0.85}).addTo(map);
+        map.fitBounds(polyline.getBounds(),{padding:[40,40]});
+        for (let i = 0; i < map_points.length; i++) {
+            let pp = map_points[i];
+            let placeName = places[i]?.name ?? "";
+            let weather = places[i]?.weather ? "⛅ "+places[i].weather : "";
+            let time = places[i]?.time ?? "";
+            let marker = L.marker(pp).addTo(map);
+            marker.bindPopup(`<b>${placeName}</b><br>${weather}<br>เวลา ${time}`);
+            if (i === 0) marker.setIcon(L.icon({iconUrl: 'https://cdn-icons-png.flaticon.com/128/3437/3437360.png', iconSize:[48,48]}));
+            else if (i === map_points.length-1) marker.setIcon(L.icon({iconUrl: 'https://cdn-icons-png.flaticon.com/128/3069/3069172.png',iconSize:[48,48]}));
+        }
+    }
+    function renderPlanResult(result, data) {
+        let t = LANG_TEXT[currentLang];
+        let html = `<div class="plan-result-frame">
+            <div class="plan-title"><span class="emoji">✅</span> ${currentLang === "th" ? "วางแผนทริปสำเร็จ" : "Trip Planned!"}</div>
+            <div class="plan-section">🏨 ${data.hotel} <span style="color:#7a6727">${currentLang === "th" ? "(โรงแรมต้นทาง/ปลายทาง)" : "(Start/End Hotel)"}</span></div>`;
+        result.days.forEach((day, i) => {
+            let weatherText = day.weather ? `<span style="color:#376ac2;">🌦️ ${currentLang === "th" ? "อากาศของวันนั้น" : "Day Weather"}: ${day.weather}</span>` : "";
+            html += `<div class="plan-section" style="margin-top:28px;">
+                ${t.day} ${i+1} (${day.date})<br>${weatherText}
+                <ul>`;
+            let route = day.places || [];
+            for (let j = 0; j < route.length; j++) {
+                const p = route[j];
+                let isHotel = p.type === 'hotel' || p.name === data.hotel;
+                let emoji = isHotel ? "🏨" : "📍";
+                let title = `<b>${p.name}</b>`;
+                let arriveT = p.time ? `🕑 <b>${currentLang === "th" ? "ถึงเวลา" : "Arrive"}: ${p.time}</b>` : "";
+                let recT = p.recommend_time ? `⏱️ <b>${currentLang === "th" ? "แนะนำอยู่" : "Recommended stay"}: ${p.recommend_time} นาที</b>` : "";
+                let departT = p.depart_time ? `🚶 <b>${currentLang === "th" ? "ออกเวลา" : "Leave"}: ${p.depart_time}</b>` : "";
+                let cost = p.cost ? `💰 <b>${currentLang === "th" ? "ค่าใช้จ่าย" : "Cost"}: ${p.cost} บาท</b>` : "";
+                let placeWeather = p.weather ? `<span style="color:#37ace2;">🌦️ ${currentLang === "th" ? "อากาศสถานที่นี้" : "Weather"}: ${p.weather}</span> ` : "";
+                html += `<li>
+                        <span class="emoji">${emoji}</span> ${title}<br>
+                        ${placeWeather}
+                        ${arriveT} ${recT} ${departT}<br>
+                        ${cost}
+                    </li>`;
+            }
+            html += "</ul></div>";
+        });
+        let sum = result.summary || {};
+        let routeStartMsg = currentLang === "th"
+            ? `🛫 เริ่มต้นจากโรงแรม: <b>${data.hotel}</b>`
+            : `🛫 Starting from hotel: <b>${data.hotel}</b>`;
+        html += `<div class="plan-summary">
+            ${routeStartMsg}<br>
+            💸 <b>${currentLang === "th" ? "ค่าใช้จ่ายรวม" : "Total Cost"}:</b> ${sum.total_cost || "-"} บาท<br>
+            😊 <b>${currentLang === "th" ? "ความพึงพอใจรวมทริป" : "Overall Satisfaction"}:</b> ${sum.avg_sat_score || "-"}/5<br>
+            🛣️ <b>${currentLang === "th" ? "ระยะทางรวม" : "Total Distance"}:</b> ${sum.total_distance || "-"} กม.<br>
+        </div></div>`;
+        return html;
+    }
+
+    document.getElementById("tripForm").onsubmit = async function(e) {
+        e.preventDefault();
+        let form = e.target;
+        let categories = [];
+        form.querySelectorAll('[name="categories"]:checked').forEach(cb => categories.push(cb.value));
+        if (categories.length === 0) {
+            alert(currentLang === 'th' ? 'กรุณาเลือกประเภทสถานที่อย่างน้อย 1 ประเภท' : 'Please select at least one place category');
+            return;
+        }
+        let nDays = parseInt(form.numDays.value) || 1;
+        let startTimes = [];
+        let maxPlaces = [];
+        let returnTimes = [];
+        for(let d=1;d<=nDays;d++) {
+            startTimes.push(form[`startTime${d}`]?.value || "08:00");
+            maxPlaces.push(parseInt(form[`maxPlaces${d}`]?.value) || 3);
+            returnTimes.push(form[`returnTime${d}`]?.value || "18:00");
+        }
+        const data = {
+            travelers: Array.from({ length: parseInt(form.numTravelers.value) }, (_, i) => ({
+                type: form[`travelerType${i + 1}`]?.value || LANG_TEXT[currentLang].thai,
+                subtype: form[`travelerSubtype${i + 1}`]?.value || (
+                    currentLang === 'th' ? "ผู้ใหญ่ไทย" : "Thai Adult"
+                )
+            })),
+            hotel: form.hotel.value,
+            startDate: form.startDate.value,
+            nDays: nDays,
+            startTimes: startTimes,
+            maxPlaces: maxPlaces,
+            returnTimes: returnTimes,
+            budget: parseInt(form.budget.value),
+            categories: categories
+        };
+        document.getElementById("result").innerHTML =
+            `<div class="plan-result-frame"><div style="font-size:2.2em;text-align:center;padding:28px;">กำลังวางแผนทริป...</div></div>`;
+        try {
+            const resp = await fetch("http://localhost:5000/plan", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            if (!resp.ok) throw new Error("HTTP error! status: "+resp.status);
+            const result = await resp.json();
+            if (result.error) {
+                document.getElementById("result").innerHTML =
+                    `<div class="plan-result-frame"><div style="color:#d20707;font-weight:600;font-size:1.7em;text-align:center;">เกิดข้อผิดพลาด: ${result.error}</div></div>`;
+                return;
+            }
+            document.getElementById("result").innerHTML = renderPlanResult(result, data);
+        } catch (err) {
+            document.getElementById("result").innerHTML =
+                `<div class="plan-result-frame"><div style="color:#d20707;font-weight:600;font-size:1.7em;text-align:center;">เกิดข้อผิดพลาด: ${err.message}<br><br>ตรวจสอบว่า app.py [server Flask] ทำงานอยู่ที่ http://localhost:5000/plan</div></div>`;
+        }
+    };
+
+    window.onload = function() {
+        setLanguage('th');
+        renderTravelersInput();
+        renderDaysInput();
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById("startDate").value = tomorrow.toISOString().split('T')[0];
+    }
+    </script>
+</body>
+</html>
